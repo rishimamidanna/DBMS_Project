@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Smart E-Commerce</title><link rel="stylesheet" href="/styles.css"><script src="/app.js" defer></script></head>
+<body>
+<div class="announcement">A little less searching. A little more finding. <span>Smart E-Commerce · Team 3</span></div>
+<header>
+ <a class="logo" href="/" aria-label="Smart E-Commerce home"><span class="logo-mark">S<span>✦</span></span>Smart E-Commerce<span class="logo-dot">.</span></a>
+ <nav aria-label="Main navigation"><button class="nav active" data-page="shop">Discover</button><button class="nav" data-page="recommendations">For you <span class="tiny-star">✦</span></button><button class="nav" data-page="orders">My orders</button><button class="nav" data-page="about">Our project</button></nav>
+ <div class="header-actions"><label class="customer"><span class="avatar">◉</span><select id="customer" aria-label="Demo customer"><option>Choose customer</option></select></label><button id="cart-button" class="cart-button" aria-label="Open cart">Bag <span id="cart-count">0</span></button></div>
+</header>
+<main>
+ <div class="connection-strip"><span id="status" class="status">● Checking Oracle…</span><span>Local academic demo · customer selection is not authentication</span><button id="connect-button">Connect Oracle ↗</button></div>
+ <section id="hero" class="hero">
+  <div class="hero-copy">
+   <div class="eyebrow hero-eyebrow"><span></span> YOUR EVERYDAY, UPGRADED</div>
+   <h1>Good finds.<br>Better <em>matches<svg class="headline-swoosh" viewBox="0 0 320 20" aria-hidden="true"><path d="M5 14 Q160 -5 315 12"/></svg></em><span class="headline-dot">.</span></h1>
+   <p>A world of possibilities. A collection that gets you. Find everyday essentials through ratings, interests and a little smarter discovery.</p>
+   <div class="hero-buttons"><button id="explore" class="primary">Explore the collection <span>↗</span></button><button class="hero-secondary" data-page="recommendations">Find my matches <span>✦</span></button></div>
+   <div class="hero-foot"><span class="mini-stars">✦ ✦ ✦</span><span>Less searching. More <strong>“that’s the one.”</strong></span></div>
+   <div class="hero-project"><span><strong>8</strong> connected tables</span><span><strong>3NF</strong> database design</span><span class="oracle-label"><i></i> Oracle powered</span></div>
+  </div>
+  <div class="hero-art">
+   <span class="art-grid" aria-hidden="true"></span><span class="art-circle" aria-hidden="true"></span><span class="art-orbit" aria-hidden="true"><i></i></span><span class="art-orbit orbit-two" aria-hidden="true"></span>
+   <span class="floating-star" aria-hidden="true">✦</span><span class="small-spark" aria-hidden="true">✧</span>
+   <div class="interest-pill"><span>✦</span> Your interests. Your next find.</div>
+   <svg class="hero-headphones" viewBox="0 0 240 240" role="img" aria-label="Animated illustration of wireless headphones"><use href="/art.svg#headphones"/></svg>
+   <div class="pick-label"><div class="pick-top"><span>THE EVERYDAY EDIT</span><span class="pick-icon">↗</span></div><strong>Sound, without the noise.</strong><small>Wireless Headphones <span>·</span> SoundMax</small><div class="pick-line"></div><div class="pick-bottom"><span>Thoughtfully discovered</span><span>✦ SMART PICK</span></div></div>
+   <div class="sql-pill"><span class="sql-icon">⌘</span><div><strong>Smart on the inside.</strong><small>Recommendations powered by SQL</small></div></div>
+   <span class="art-caption">THE ART OF FINDING YOUR FAVOURITE</span>
+  </div>
+  <div class="hero-ribbon" aria-hidden="true"><div class="ribbon-track"><span>DISCOVER YOUR EVERYDAY</span><i>✦</i><span>PICKED WITH PURPOSE</span><i>✦</i><span>FIND YOUR NEXT FAVOURITE</span><i>✦</i><span>SMARTER SHOPPING STARTS HERE</span><i>✦</i><span>DISCOVER YOUR EVERYDAY</span><i>✦</i><span>PICKED WITH PURPOSE</span><i>✦</i><span>FIND YOUR NEXT FAVOURITE</span><i>✦</i><span>SMARTER SHOPPING STARTS HERE</span><i>✦</i></div></div>
+ </section>
+ <section id="collection" class="collection">
+  <div class="section-top"><div><div class="eyebrow" id="section-kicker">THE COLLECTION</div><h2 id="section-title">Find your next favourite</h2><p id="section-description">A small collection. A world of possibilities.</p></div><span id="result-count" class="result-count"></span></div>
+  <div id="toolbar" class="toolbar"><div id="categories" class="categories"></div><div class="filters"><label class="search"><span>⌕</span><input id="search" placeholder="Search products…" aria-label="Search products"></label><select id="sort" aria-label="Sort products"><option value="featured">Featured</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option><option value="rating">Top rated</option></select></div></div>
+  <div id="grid" class="product-grid"></div><div id="empty" class="empty" hidden></div>
+ </section>
+ <section id="orders" hidden><div class="section-top"><div><div class="eyebrow">YOUR PURCHASES</div><h2>Every order, in one place.</h2><p>Order history and line items, directly from Oracle.</p></div></div><div id="order-list"></div></section>
+ <section id="about" hidden><div class="section-top"><div><div class="eyebrow">BUILT WITH PURPOSE</div><h2>Smart outside. Structured inside.</h2><p>Smart E-Commerce Recommendation System · DBMS Cornerstone Project</p></div></div><div class="about-grid"><article><span>01 / THE DATABASE</span><h3>Eight connected tables.</h3><p>App_User, Category, Product, Cart, Orders, Order_Item, Product_Interaction and Review organize customers, catalogue, purchases and feedback.</p></article><article><span>02 / NORMALISATION</span><h3>Designed through 3NF.</h3><p>Atomic order lines remove repeating groups. Separating orders and products removes partial dependencies. Customer and category details live in their own tables to remove transitive dependencies.</p></article><article><span>03 / RECOMMENDATIONS</span><h3>Rules, not black boxes.</h3><p>SQL combines average ratings with interaction counts, excluding products a customer already interacted with. Ratings and counts are aggregated separately to avoid join multiplication. Category history explains relevant matches.</p></article><article><span>04 / CONSISTENCY</span><h3>One reliable transaction.</h3><p>Checkout calculates prices on the server, validates stock, preserves the price charged and saves Orders, Order_Item and PURCHASE interactions together. The browser bag is not a new database table.</p></article></div><div class="project-note">Presentation-only local application. No payment processing, production login or shipping integration. Existing records and database schema are preserved.</div></section>
+ <section class="value-bar"><div><span>✦</span><h3>Picked with purpose</h3><p>Recommendations rooted in your interests.</p></div><div><span>◇</span><h3>Connected to Oracle</h3><p>One database. Everything in sync.</p></div><div><span>◎</span><h3>Ratings that matter</h3><p>Real customer feedback guides discovery.</p></div></section>
+</main>
+<footer><a class="logo" href="/">Smart E-Commerce<span class="logo-dot">.</span></a><p>A smarter way to discover your everyday.</p><span>Team 3 · Oracle SQL & PL/SQL · DBMS Project</span></footer>
+<dialog id="connect-dialog"><form id="connect-form"><button class="close" type="button" data-close="connect-dialog" aria-label="Close">×</button><div class="eyebrow">YOUR PROJECT DATABASE</div><h2>Connect to Oracle</h2><p id="connection-details">smart_ecommerce · localhost:1521/FREEPDB1</p><label>Schema password<input id="password" type="password" required autocomplete="off" placeholder="Enter your database password"></label><p class="help">Used only by your local server to connect. It is not saved to disk. Keep Oracle Docker running.</p><p id="connect-error" class="form-error" role="alert"></p><button class="primary" type="submit">Connect database ↗</button></form></dialog>
+<dialog id="product-dialog"><button class="close" data-close="product-dialog" aria-label="Close">×</button><div id="product-detail"></div></dialog>
+<dialog id="cart-dialog"><button class="close" data-close="cart-dialog" aria-label="Close">×</button><div class="eyebrow">GOOD FINDS, ALL TOGETHER</div><h2>Your bag <span id="bag-label"></span></h2><p class="help">Stored in this browser for the selected customer. Not reserved until checkout.</p><div id="cart-items"></div><div class="cart-total"><span>Total</span><strong id="cart-total"></strong></div><p class="help">Checkout creates a real order and reduces Oracle inventory. No payment is collected.</p><button id="checkout" class="primary">Place demo order ↗</button></dialog>
+<div id="toast" class="toast" role="status" hidden></div>
+</body></html>

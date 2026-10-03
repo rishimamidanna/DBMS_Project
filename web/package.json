@@ -1,0 +1,13 @@
+{
+  "name": "smart-ecommerce-project",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server.js",
+    "demo": "node --env-file-if-exists=.env server.js --demo",
+    "test": "node --test"
+  },
+  "engines": { "node": ">=22" },
+  "dependencies": { "oracledb": "^6.10.0" }
+}
