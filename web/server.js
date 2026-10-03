@@ -98,11 +98,12 @@ const server=http.createServer(async(req,res)=>{
   res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Referrer-Policy','no-referrer');res.setHeader('X-Frame-Options','DENY');
   res.setHeader('Content-Security-Policy',"default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'");
   try{
-    // Local-only demo, not a public authenticated shop. Reject cross-origin/browser POSTs.
-    const allowedHosts=[`localhost:${port}`,`127.0.0.1:${port}`];
-    if(!allowedHosts.includes(req.headers.host))return json(res,403,{error:'Local access only.'});
-    if(req.method==='POST' && (!['http://localhost:'+port,'http://127.0.0.1:'+port].includes(req.headers.origin)||!req.headers['content-type']?.startsWith('application/json')))return json(res,403,{error:'Invalid request origin.'});
-    const url=new URL(req.url,'http://localhost');if(url.pathname.startsWith('/api/'))return await api(req,res,url);
+    // Local-only demo by default; allows cloud hosts (like Vercel) if ALLOW_REMOTE is set or running in production/cloud environments
+    const isLocal=['localhost:'+port,'127.0.0.1:'+port].includes(req.headers.host);
+    const allowRemote=process.env.ALLOW_REMOTE==='true'||process.env.VERCEL==='1'||Boolean(process.env.VERCEL_URL);
+    if(!isLocal && !allowRemote)return json(res,403,{error:'Local access only.'});
+    if(req.method==='POST' && !allowRemote && (!['http://localhost:'+port,'http://127.0.0.1:'+port].includes(req.headers.origin)||!req.headers['content-type']?.startsWith('application/json')))return json(res,403,{error:'Invalid request origin.'});
+    const url=new URL(req.url,`http://${req.headers.host || 'localhost'}`);if(url.pathname.startsWith('/api/'))return await api(req,res,url);
     if(req.method!=='GET')return json(res,405,{error:'Method not allowed.'});
     const files={'/':'index.html','/app.js':'app.js','/styles.css':'styles.css','/art.svg':'art.svg'};
     const file=files[url.pathname];if(!file)return json(res,404,{error:'Not found.'});
